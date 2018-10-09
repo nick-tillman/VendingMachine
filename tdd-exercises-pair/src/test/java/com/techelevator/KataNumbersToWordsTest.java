@@ -39,10 +39,24 @@ public class KataNumbersToWordsTest {
 	
 	@Test
 	public void KataLessThanOneHundredsTest() {
+		Assert.assertEquals("fourteen", kat.numberToWord(14));
 		Assert.assertEquals("thirty-nine", kat.numberToWord(39));
 		Assert.assertEquals("fifty", kat.numberToWord(50));
 		Assert.assertEquals("ninety-nine", kat.numberToWord(99));
 		Assert.assertEquals("seventy-eight", kat.numberToWord(78));
 		Assert.assertEquals("ninety-eight", kat.numberToWord(98));
+	}
+	
+	@Test
+	public void KataHundredsTest() {
+		Assert.assertEquals(".numberToWord(100)", "one hundred", kat.numberToWord(100));
+		Assert.assertEquals(".numberToWord(900)", "nine hundred", kat.numberToWord(900));
+		Assert.assertEquals(".numberToWord(100)", "one hundred", kat.numberToWord(100));
+		Assert.assertEquals(".numberToWord(811)", "eight hundred and eleven", kat.numberToWord(811));
+		Assert.assertEquals(".numberToWord(453)", "four hundred and fifty-three", kat.numberToWord(453));
+
+	
+
+
 	}
 }
