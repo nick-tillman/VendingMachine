@@ -63,4 +63,23 @@ public class KataNumbersToWordsTest {
 		Assert.assertEquals(".numberToWord(8011))", "eight thousand and eleven", kat.numberToWord(8011));
 
 	}
+	
+	@Test
+	public void KataTenThousandTest() {
+		Assert.assertEquals(".numberToWord(10000))", "ten thousand", kat.numberToWord(10000));
+		Assert.assertEquals(".numberToWord(10001))", "ten thousand and one", kat.numberToWord(10001));
+		Assert.assertEquals(".numberToWord(40102))", "forty thousand one hundred and two", kat.numberToWord(40102));
+		Assert.assertEquals(".numberToWord(99999))", "ninety-nine thousand nine hundred and ninety-nine", kat.numberToWord(99999));
+		Assert.assertEquals(".numberToWord(12385))", "twelve thousand three hundred and eighty-five", kat.numberToWord(12385));
+
+	}
+	
+	@Test
+	public void KataHundredThousandsTest() {
+		Assert.assertEquals(".numberToWord(100000))", "one hundred thousand", kat.numberToWord(100000));
+		Assert.assertEquals(".numberToWord(100001))", "one hundred thousand and one", kat.numberToWord(100001));
+		Assert.assertEquals(".numberToWord(123456))", "one hundred twenty-three thousand four hundred and fifty-six", kat.numberToWord(123456));
+		Assert.assertEquals(".numberToWord(456001))", "four hundred fifty-six thousand and one", kat.numberToWord(456001));
+		Assert.assertEquals(".numberToWord(999905))", "nine hundred ninety-nine thousand nine hundred and five", kat.numberToWord(999905));
+	}
 }
