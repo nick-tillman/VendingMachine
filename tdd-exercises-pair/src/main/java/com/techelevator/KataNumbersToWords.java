@@ -33,49 +33,58 @@ public class KataNumbersToWords {
 		} else if(values.length == 3) {
 			numString = kat.convertHundreds(values[0], values[1], values[2]);
 		} else if(values.length == 4) {
-			if(values[1] == 0 && values[2] == 0 && values[3] == 0) {
-				numString = onesMap.get(values[0]) + " thousand";
-			} else { 
-				numString = onesMap.get(values[0]) + " thousand and " +kat.convertHundreds(values[1], values[2], values[3]);
-			}
+			numString = kat.convertThousands(values[0], values[1], values[2], values[3]);
 		} else if(values.length == 5) {
 			//code
 		} else if(values.length == 6) {
-			
+			//code
 		}
 		return numString;
 	}
 	
-	public String convertSingleDigit(int num1) {
+	public String convertSingleDigit(int index0) {
 		String numString = "";
-		numString = onesMap.get(num1);
+		numString = onesMap.get(index0);
 		return numString;
 	}
 	
-	public String convertTens(int num1, int num2) {
+	public String convertTens(int index0, int index1) {
 		kat = new KataNumbersToWords();
 		String numString = "";
-		if(num1 == 0) {									//checking if 2 digit number is really a single digit number, i.e. 01, 02, etc.
-			numString = kat.convertSingleDigit(num2);
-		} else if(num1 == 1) {							//checking if 2 digit number is a "teen" number, works from 10 to 19.
-			numString = teensMap.get(10 + num2);
-		} else if(num2 == 0) {							//checking if 2 digit number ends in 0, i.e. 20, 30, etc.
-			numString = doubleDigit.get(num1);
-		} else {											//else returning every other number besides the above cases.
-		numString = doubleDigit.get(num1) + "-" + onesMap.get(num2);
+		if(index0 == 0) {											//checking if 2 digit number is really a single digit number, i.e. 01, 02, etc.
+			numString = kat.convertSingleDigit(index1);
+		} else if(index0 == 1) {										//checking if 2 digit number is a "teen" number, works from 10 to 19.
+			numString = teensMap.get(10 + index1);
+		} else if(index1 == 0) {										//checking if 2 digit number ends in 0, i.e. 20, 30, etc.
+			numString = doubleDigit.get(index0);
+		} else {														//else returning every other number besides the above cases.
+		numString = doubleDigit.get(index0) + "-" + onesMap.get(index1);
 		}
 		return numString;
 	}
 	
-	public String convertHundreds(int num1, int num2, int num3) {
+	public String convertHundreds(int index0, int index1, int index2) {
 		kat = new KataNumbersToWords();
 		String numString = "";
-		if(num1 == 0 && num2 == 0) {						//checking if 3 digit number is really a single digit number, i.e. 001, 002, etc.
-			numString = kat.convertSingleDigit(num3);
-		} else if(num2 == 0 && num3 == 0) {				//checking if 3 digit number ends in zeros, i.e. 100, 200, etc.
-			numString = onesMap.get(num1) + " hundred";
-		} else {											//else getting the hundreds digit and passing our convertTens method the rest of the digits
-			numString = onesMap.get(num1) + " hundred and " + kat.convertTens(num2, num3);
+		if(index0 == 0 && index1 == 0) {								//checking if 3 digit number is really a single digit number, i.e. 001, 002, etc.
+			numString = "and " + kat.convertSingleDigit(index2);
+		} else if(index1 == 0 && index2 == 0) {						//checking if 3 digit number ends in zeros, i.e. 100, 200, etc.
+			numString = onesMap.get(index0) + " hundred";
+		} else {														//else getting the hundreds digit and passing our convertTens method the rest of the digits
+			numString = onesMap.get(index0) + " hundred and " + kat.convertTens(index1, index2);
+		}
+		return numString;
+	}
+	
+	public String convertThousands(int index0, int index1, int index2, int index3) {
+		kat = new KataNumbersToWords();
+		String numString = "";
+		if(index1 == 0 && index2 == 0 && index3 == 0) { 				//checking if 4 digit number ends in 3 zeros, i.e. 1000, 2000, etc.
+			numString = onesMap.get(index0) + " thousand";
+		} else if(index1 == 0 && index2 != 0) {						//checking if 4 digit number has no hundreds but does have tens, i.e. 1025, 3011, etc.
+			 numString = onesMap.get(index0) + " thousand and " + kat.convertTens(index2, index3);
+		} else {														//else getting the thousands digit and passing the rest to convertHundreds.
+			numString = onesMap.get(index0) + " thousand " +kat.convertHundreds(index1, index2, index3);
 		}
 		return numString;
 	}

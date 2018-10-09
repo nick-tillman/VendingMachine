@@ -16,12 +16,8 @@ public class KataNumbersToWordsTest {
 	
 	@After
 	public void end() {
-		
 		kat = null;
 	}
-	
-	
-	
 	
 	@Test
 	public void KataTensTest() {
@@ -61,6 +57,10 @@ public class KataNumbersToWordsTest {
 	public void KataThousandTest() {
 		Assert.assertEquals(".numberToWord(1000))", "one thousand", kat.numberToWord(1000));
 		Assert.assertEquals(".numberToWord(1001))", "one thousand and one", kat.numberToWord(1001));
-		
+		Assert.assertEquals(".numberToWord(2253))", "two thousand two hundred and fifty-three", kat.numberToWord(2253));
+		Assert.assertEquals(".numberToWord(6709))", "six thousand seven hundred and nine", kat.numberToWord(6709));
+		Assert.assertEquals(".numberToWord(4009))", "four thousand and nine", kat.numberToWord(4009));
+		Assert.assertEquals(".numberToWord(8011))", "eight thousand and eleven", kat.numberToWord(8011));
+
 	}
 }
