@@ -81,5 +81,9 @@ public class KataNumbersToWordsTest {
 		Assert.assertEquals(".numberToWord(123456))", "one hundred twenty-three thousand four hundred and fifty-six", kat.numberToWord(123456));
 		Assert.assertEquals(".numberToWord(456001))", "four hundred fifty-six thousand and one", kat.numberToWord(456001));
 		Assert.assertEquals(".numberToWord(999905))", "nine hundred ninety-nine thousand nine hundred and five", kat.numberToWord(999905));
+		Assert.assertEquals(".numberToWord(125670))", "one hundred twenty-five thousand six hundred and seventy", kat.numberToWord(125670));
+		Assert.assertEquals(".numberToWord(945600))", "nine hundred forty-five thousand six hundred", kat.numberToWord(945600));
+
+
 	}
 }
