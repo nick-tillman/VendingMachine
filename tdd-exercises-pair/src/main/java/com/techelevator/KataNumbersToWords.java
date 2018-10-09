@@ -104,8 +104,14 @@ public class KataNumbersToWords {
 		String numString = "";
 		if(index1 == 0 && index2 == 0 && index3 == 0 && index4 == 0 && index5 == 0) {		//checking 6 digit number if ends with zeros, i.e. 100000, 200000, etc.
 			numString = onesMap.get(index0) + " hundred thousand";
+		} else if(index1 == 0 && index2 == 0 && index3 ==0) {
+			numString = onesMap.get(index0) + " hundred thousand and " + convertTens(index4, index5);
 		} else if(index1 == 0 & index2 == 0) {											//checking 6 digit number if index 1 and 2 are zeros, i.e. 100345, 200986, etc.
 			numString = onesMap.get(index0) + " hundred thousand " + convertHundreds(index3, index4, index5);
+		} else if(index2 == 0 && index3 == 0) {
+			numString = onesMap.get(index0) + " hundred " + doubleDigit.get(index1) + " thousand and " + convertTens(index4, index5);
+		} else if(index1 == 0) {
+			numString = onesMap.get(index0) + " hundred and " + convertThousands(index2, index3, index4, index5);
 		} else {																			//else getting all over cases not covered above.
 			numString = onesMap.get(index0) + " hundred " + convertTenThousands(index1, index2, index3, index4, index5);
 		}
