@@ -27,7 +27,7 @@ public class WordCount {
 		
 		trim();
 		String[] wordArray = book.split(" ");
-		String[] sentenceArray = book.split(".");
+		String[] sentenceArray = book.split("\\.");
 		
 		wordCount = wordArray.length;
 		sentenceCount = sentenceArray.length;
