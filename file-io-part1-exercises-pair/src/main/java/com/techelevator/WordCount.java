@@ -1,11 +1,11 @@
 package com.techelevator;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.util.Scanner;
 
 public class WordCount {
+	
+	private static String book;
 	
 	private static Scanner inputReader = new Scanner(System.in);
 
@@ -14,44 +14,27 @@ public class WordCount {
 		File inputFile = getFileFromUser();
 		int wordCount = 0;
 		int sentenceCount = 0;
-		String book = "";
+		book = "";
 		
 		try (Scanner fileScanner = new Scanner(inputFile)) {
 			while (fileScanner.hasNextLine()) {
 				String line = fileScanner.nextLine();
 				book += line + " ";
 			}
-			
 		} catch (Exception ex) {
 			System.out.println("An exception occurred!");
 		}
-//		book = book.replace("*", " ");
-//		book = book.replace("·", " ");
-//		book = book.replace("]", " ");
-//		book = book.replace("[", " ");
-//		book = book.replace("_", " ");
-//		book = book.replace("\"", " ");
-//		book = book.replace("(", " ");
-//		book = book.replace(")", " ");
-//		book = book.replace(",", " ");
-//		book = book.replace(";", " ");
-//		book = book.replace(":", " ");
-//		book = book.replace(">", " ");
-//		book = book.replace("<", " ");
-//		book = book.replace("%", " ");
-//		book = book.replace("#", " ");
-//		book = book.replace("@", " ");
-//		book = book.replace("&", " ");
-//		//book = book.replace("--", " ");
-//
-//		book = book.replace("      ", " ");
-//		book = book.replace("     ", " ");
-//		book = book.replace("    ", " ");
-//		book = book.replace("   ", " ");
-//		book = book.replace("  ", " ");
-		String[] newArray = book.split(" ");
-		wordCount = newArray.length;
-		System.out.println(book);
+		
+		trim();
+		String[] wordArray = book.split(" ");
+		String[] sentenceArray = book.split(".");
+		
+		wordCount = wordArray.length;
+		sentenceCount = sentenceArray.length;
+		System.out.println();
+		System.out.println(wordCount + " words in document.");
+		System.out.println(sentenceCount + " sentences in document.");
+
 }
 	
 	//users/ntillman/repos/exercises/m1-w4d2-file-io-part1-exercises/alices_adventures_in_wonderland.txt
@@ -62,5 +45,36 @@ public class WordCount {
 		String path = inputReader.nextLine();
 		File quiz = new File(path);
 		return quiz;
+	}
+	
+	public static void trim() {
+		book = book.replace("!", ".");
+		book = book.replace("?", ".");
+		book = book.replace("----", "");
+		book = book.replace("--", "");
+		book = book.replace("- ", "-");
+		book = book.replace(" -", "-");
+		book = book.replace("*", " ");
+		book = book.replace("·", " ");
+		book = book.replace("]", " ");
+		book = book.replace("[", " ");
+		book = book.replace("_", " ");
+		book = book.replace("\"", " ");
+		book = book.replace("(", " ");
+		book = book.replace(")", " ");
+		book = book.replace(",", " ");
+		book = book.replace(";", " ");
+		book = book.replace(":", " ");
+		book = book.replace(">", " ");
+		book = book.replace("<", " ");
+		book = book.replace("%", " ");
+		book = book.replace("#", " ");
+		book = book.replace("@", " ");
+		book = book.replace("&", " ");
+		book = book.replace("      ", " ");
+		book = book.replace("     ", " ");
+		book = book.replace("    ", " ");
+		book = book.replace("   ", " ");
+		book = book.replace("  ", " ");
 	}
 }
