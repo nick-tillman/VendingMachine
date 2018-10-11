@@ -16,7 +16,6 @@ public class Program {
 			log("What would you like to purchase?");
 			String userSelection = inputReader.nextLine();
 			vm.purchaseItem(userSelection);
-			vm.getList();
 		}
 
 	}

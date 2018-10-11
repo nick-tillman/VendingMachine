@@ -2,28 +2,16 @@ package com.techelevator.vendingprogram;
 
 public class Item {
 
-	private String slot;
 	private String name;
-	private double price;
 	private String type;
 	
-	public Item(String slot, String name, double price, String type) {
-		this.slot = slot;
+	public Item(String name, String type) {
 		this.name = name;
-		this.price = price;
 		this.type = type;
-	}
-
-	public String getSlot() {
-		return slot;
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public double getPrice() {
-		return price;
 	}
 
 	public String getType() {
