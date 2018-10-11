@@ -24,7 +24,7 @@ public class FindAndReplace {
 				try (Scanner fileScanner = new Scanner(newFile)) {
 					while (fileScanner.hasNextLine()) {
 						String line = fileScanner.nextLine();
-						sourceFile += line + " ";
+						sourceFile += line + '\n';
 					}
 				} catch (Exception ex) {
 					System.out.println("An exception occurred!");
