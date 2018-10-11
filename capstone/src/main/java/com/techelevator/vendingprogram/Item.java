@@ -6,6 +6,13 @@ public class Item {
 	private String name;
 	private double price;
 	private String type;
+	
+	public Item(String slot, String name, double price, String type) {
+		this.slot = slot;
+		this.name = name;
+		this.price = price;
+		this.type = type;
+	}
 
 	public String getSlot() {
 		return slot;
