@@ -17,7 +17,7 @@ public class Program {
 		if(selection.equals("1")) {
 			vm.getList();
 		} else if(selection.equals("2")) {
-			//code
+			menu.purchaseMenu();
 		} else {
 			System.out.println("Invalid selection! Please make a new selection!");
 		}
