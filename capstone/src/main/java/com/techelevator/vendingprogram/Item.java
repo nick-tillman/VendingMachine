@@ -19,16 +19,16 @@ public class Item {
 	}
 
 	public String getSound() {
-		if (type == "chip") {
+		if (type.equals("Chip")) {
 			return "Crunch, Crunch, Yum!";
 		}
-		if (type == "candy") {
+		if (type.equals("Candy")) {
 			return "Munch Munch, Yum!";
 		}
-		if (type == "drink") {
+		if (type.equals("Drink")) {
 			return "Glug Glug, Yum!";
 		}
-		if (type == "gum") {
+		if (type.equals("Gum")) {
 			return "Chew Chew, Yum!";
 		}
 		return "";

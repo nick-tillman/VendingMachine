@@ -50,13 +50,9 @@ public class Slot {
 	@Override
 	public String toString() {
 		if(quantity > 0) {
-			return slotNumber + ": " + getItemName() + "\t" 
-									+ "$" + String.valueOf(getPrice()) + "\t"
-									+ String.valueOf(getQuantity()) + " left";
+			return slotNumber + ": " + getItemName() + "\t" + "$" + String.valueOf(getPrice()) + "\t" + String.valueOf(getQuantity()) + " left";
 		} else {
-			return slotNumber + ": " + getItemName() + "\t" 
-					+ "$" + String.valueOf(getPrice()) + "\t"
-					+ "SOLD OUT";
+			return slotNumber + ": " + getItemName() + "\t" + "$" + String.valueOf(getPrice()) + "\t" + "SOLD OUT";
 		}
 	}
 	
