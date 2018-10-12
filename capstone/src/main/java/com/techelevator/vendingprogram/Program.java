@@ -1,29 +1,45 @@
 package com.techelevator.vendingprogram;
 
 import java.io.File;
-import java.util.Scanner;
 
 public class Program {
 
 	public static void main(String[] args) {
-		Scanner inputReader = new Scanner(System.in);
-
+		Menu menu = new Menu();
 		String path = "/users/ntillman/repos/other/team6-java-week4-pair-exercises/capstone/vendingmachine.csv";
 		File newFile = new File(path);
 		VendingMachine vm = new VendingMachine(newFile);
-		boolean done = false;
-		while (!done) {
-			log("What would you like to purchase?");
-			String userSelection = inputReader.nextLine();
-			vm.purchaseItem(userSelection);
+		menu.titleCard();
+		
+		boolean finished = false;
+		while (!finished) {
+			
+			menu.mainMenuGraphic();
+			String selection = menu.getInputFromUser("Please select a menu: ");
+			if (selection.equals("1")) {
+				vm.printInventoryList();
+			} else if (selection.equals("2")) {
+				boolean done = false;
+				while (!done) {
+					menu.purchaseMenuGraphic();
+					String purchaseSelection = menu.getInputFromUser("Please select an option: ");
+					if(purchaseSelection.equals("1")) {
+						menu.addFunds(vm);
+					} else if(purchaseSelection.equals("2")) {
+						menu.purchaseMenu(vm);
+					} else if(purchaseSelection.equals("3")) {
+						menu.finishTransaction(vm);
+						done = true;
+					}
+				}
+			} else if (selection.equals("3")) {
+				System.out.println("Please come again!");
+				finished = true;
+			} else {
+				System.out.println("Invalid selection! Please make a new selection!");
+			}
+			
 		}
-
 	}
-
-	public static void log(String message) {
-		System.out.println(message);
-	}
-
-	// users/ntillman/repos/other/team6-java-week4-pair-exercises/capstone/vendingmachine.csv
 
 }
