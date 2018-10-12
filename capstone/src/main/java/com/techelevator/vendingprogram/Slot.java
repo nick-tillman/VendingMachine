@@ -19,7 +19,7 @@ public class Slot {
 	}
 	
 	public double getPrice() {
-		return this.getPrice();
+		return this.price;
 	}
 	
 	public Item getItem() {
@@ -41,6 +41,23 @@ public class Slot {
 	
 	public String getItemType() {
 		return this.item.getType();
+	}
+	
+	public String getItemSound() {
+		return this.item.getSound();
+	}
+	
+	@Override
+	public String toString() {
+		if(quantity > 0) {
+			return slotNumber + ": " + getItemName() + "\t" 
+									+ "$" + String.valueOf(getPrice()) + "\t"
+									+ String.valueOf(getQuantity()) + " left";
+		} else {
+			return slotNumber + ": " + getItemName() + "\t" 
+					+ "$" + String.valueOf(getPrice()) + "\t"
+					+ "SOLD OUT";
+		}
 	}
 	
 }

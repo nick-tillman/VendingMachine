@@ -20,6 +20,22 @@ public class VendingMachine {
 		this.setupFile = setupFile;
 		setupMachine();
 	}
+	
+	public Map<String, Slot> getInventory() {
+		return this.inventory;
+	}
+	
+	public double getCustomerFunds() {
+		return this.customerFunds;
+	}
+	
+	public double getProfit() {
+		return this.profit;
+	}
+	
+	public Queue<Item> getCustomerPurchases() {
+		return customerPurchases;
+	}
 
 	public static void setupMachine() {
 		try (Scanner fileScanner = new Scanner(setupFile)) {
@@ -40,25 +56,42 @@ public class VendingMachine {
 		for (String key : keySet) {
 			if (key.equalsIgnoreCase(userSelection)) {
 				Slot selection = inventory.get(userSelection);
-				customerPurchases.add(selection.dispense());
-				customerFunds -= selection.getPrice();
-				profit += selection.getPrice();
-				// write transaction to log
-
+					if(selection.getQuantity() > 0) {
+						customerPurchases.add(selection.dispense());
+						customerFunds -= selection.getPrice();
+						profit += selection.getPrice();
+						//write to log
+						//write to sales report
+					} else {
+						System.out.println("SOLD OUT! Please make a different selection!");
+					}
 			}
 		}
 	}
 	
 	public void addFunds(Double feedMoney) {
+		//write to log
 		customerFunds += feedMoney;
 	}
 	
 	public double giveChange() {
-		return this.customerFunds;
+		double change = customerFunds;
+		customerFunds = 0;
+		//write to log
+		return change;
 	}
 	
 	public String calculateCoins(double change) {
-		
 		return "";
+	}
+	
+	public void getList() {
+		System.out.println("SLOT\t\tNAME\t\tPRICE\t\tQTY.");
+		System.out.println("****************************************************");
+		Set<String> keySet = inventory.keySet();
+		for(String key : keySet) {
+			Slot newSlot = inventory.get(key);
+			System.out.println(newSlot.toString());
+		}
 	}
 }
