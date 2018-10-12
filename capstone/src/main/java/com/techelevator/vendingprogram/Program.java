@@ -6,7 +6,7 @@ public class Program {
 
 	public static void main(String[] args) {
 		Menu menu = new Menu();
-		String path = "/users/ntillman/repos/other/team6-java-week4-pair-exercises/capstone/vendingmachine.csv";
+		String path = "/Users/mschroeder/repos/capstoneVending/capstone/vendingmachine.csv";
 		File newFile = new File(path);
 		VendingMachine vm = new VendingMachine(newFile);
 		menu.titleCard();
