@@ -35,7 +35,6 @@ public class VendingMachine {
 	}
 	
 	
-
 	public Queue<Item> getCustomerPurchases() {
 		return customerPurchases;
 	}

@@ -35,6 +35,7 @@ public class Program {
 			} else if (selection.equals("3")) {
 				System.out.println("Please come again!");
 				finished = true;
+				System.exit(1);
 			} else {
 				System.out.println("Invalid selection! Please make a new selection!");
 			}

@@ -43,14 +43,16 @@ public class Menu {
 		if(vm.getCustomerFunds() > 0) {
 			System.out.println("Please take your change: $" + vm.giveChange());
 		}
-		System.out.println("Enjoy your snacks!");
 		Queue<Item> copyQueue = new LinkedList<Item>();
 		copyQueue = vm.getCustomerPurchases();
-		
-		for(int i = 0; i <= copyQueue.size(); i++) {
-			String sound = copyQueue.remove().getSound();
-			System.out.println(sound);
+		if (copyQueue.size() > 0) {
+			System.out.println("Enjoy your snacks!");
+			for(int i = 0; i <= copyQueue.size(); i++) {
+				String sound = copyQueue.remove().getSound();
+				System.out.println(sound);
+			}
 		}
+		System.out.println("Buy something next time, will ya!");
 	}
 	
 	public void purchaseMenu(VendingMachine vm) {
@@ -62,7 +64,7 @@ public class Menu {
 			System.out.println("Please enter a valid slot number!");
 		} else if(vm.getCustomerFunds() < vm.getPurchasePrice(userSelection)) {
 			System.out.println("You do not have enough funds! Please add money!");
-		} else if(vm.getPurchaseItemQty(userSelection) < 0) {
+		} else if(vm.getPurchaseItemQty(userSelection) == 0) {
 			System.out.println("SOLD OUT! Please make a different selection!");
 		} else {
 			vm.purchaseItem(userSelection);
