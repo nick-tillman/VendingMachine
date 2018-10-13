@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="capstone/src/main/java"/>
+	<classpathentry kind="src" path="capstone/src/test/java"/>
+	<classpathentry kind="src" path="file-io-part1-exercises-pair/src/main/java"/>
+	<classpathentry kind="src" path="file-io-part2-exercises/src/main/java"/>
+	<classpathentry kind="src" path="tdd-exercises-pair/src/main/java"/>
+	<classpathentry kind="src" path="tdd-exercises-pair/src/test/java"/>
+	<classpathentry kind="output" path="capstone/target/classes"/>
+</classpath>
