@@ -5,12 +5,24 @@ import java.io.File;
 public class Program {
 
 	public static void main(String[] args) {
+		
+		/*
+		 * Here, we are instantiating a new menu object, taking in the path to our vending machine file, creating a
+		 * new file object that points to that file path and then instantiating a new vending machine object and
+		 * passing it that file to create our vending machine.
+		 */
 		Menu menu = new Menu();
 		String path = "/users/ntillman/repos/other/team6-java-week4-pair-exercises/capstone/vendingmachine.csv";
 		File newFile = new File(path);
 		VendingMachine vm = new VendingMachine(newFile);
 		menu.titleCard();
 		
+		/*
+		 * Here is the main if statements of our program. We take in a user input on which menu option they would
+		 * like to go to and then run the appropriate function from our menu object we created above. A few
+		 * loops and if statements check to make sure the user has entered a valid selection and that the menu
+		 * will continue to loop before the program exits.
+		 */
 		boolean finished = false;
 		while (!finished) {
 			
@@ -30,11 +42,14 @@ public class Program {
 					} else if(purchaseSelection.equals("3")) {
 						menu.finishTransaction(vm);
 						done = true;
+					} else {
+						System.out.println("Invalid selection! Please make a new selection!");
 					}
 				}
 			} else if (selection.equals("3")) {
 				System.out.println("Please come again!");
 				finished = true;
+				//print out sales report
 				System.exit(1);
 			} else {
 				System.out.println("Invalid selection! Please make a new selection!");
