@@ -50,30 +50,6 @@ public class Menu {
 	}
 	
 	/**
-	 * When run, if the customerFunds variable in the vending machine is greater than 0, we return the customers
-	 * change. We then check our customer purchases queue, which stores all the items the customer has purchased,
-	 * if it equals 0, we prompt the user to buy something next time, if it is not equal to 0, we remove each item
-	 * from the queue and print its related consume sound.
-	 * @param vm
-	 */
-	public void finishTransaction(VendingMachine vm) {
-		if(vm.getCustomerFunds() > 0) {
-			System.out.println("Please take your change: $" + String.format("%.2f", vm.giveChange()));
-		}
-		Queue<Item> copyQueue = vm.getCustomerPurchases();
-		if(copyQueue.size() == 0) {
-			System.out.println("Buy something next time, will ya!");
-		} else {
-			System.out.println("Enjoy your snacks!");
-			for(int i = 0; i < copyQueue.size(); i++) {
-				String sound = copyQueue.remove().getSound();
-				System.out.println(sound);
-			}
-		}
-	
-	}
-	
-	/**
 	 * When run, we first print out how many funds the customer has to spend from the customerFunds variable. Next
 	 * we print the inventory list and ask for the users input in entering a slot number for a snack. We then check
 	 * this input to see if it is a valid key for our inventory using a boolean check method in our vending machine,
@@ -96,6 +72,33 @@ public class Menu {
 			vm.purchaseItem(userSelection);
 			System.out.println("Enjoy your " + vm.getSlotItemName(userSelection) + "!");
 		}
+	}
+	
+	/**
+	 * When run, if the customerFunds variable in the vending machine is greater than 0, we return the customers
+	 * change. We then check our customer purchases queue, which stores all the items the customer has purchased,
+	 * if it equals 0, we prompt the user to buy something next time, if it is not equal to 0, we remove each item
+	 * from the queue and print its related consume sound.
+	 * @param vm
+	 */
+	public void finishTransaction(VendingMachine vm) {
+		if(vm.getCustomerFunds() > 0) {
+			System.out.println("Please take your change: $" + String.format("%.2f", vm.giveChange()));
+		}
+		Queue<Item> copyQueue = vm.getCustomerPurchases();
+		if(copyQueue.size() == 0) {
+			System.out.println("Buy something next time, will ya!");
+		} else {
+			System.out.println("Enjoy your snacks!");
+			int counter = copyQueue.size();
+			for(int i = 0; i < counter; i++) {
+				String sound = copyQueue.remove().getSound();
+				System.out.println(sound);
+			}
+			vm.clearCustomerPurchases();
+
+		}
+	
 	}
 	
 	public void mainMenuGraphic() {

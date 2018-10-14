@@ -30,7 +30,7 @@ public class Logs {
 	}
 	
 	/**
-	 * Takes in a name and price and adds them to the log objects inventoryQty map and invetoryPrices map.
+	 * Takes in a name and price and adds them to the log objects inventoryQty map and inventoryPrices map.
 	 */
 	public void setupLogsInventory(String name, double price) {
 		this.inventoryQty.put(name, 0);

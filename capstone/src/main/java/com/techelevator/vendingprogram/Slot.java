@@ -46,7 +46,7 @@ public class Slot {
 	}
 	
 	/**
-	 * returns the name string parameter of the item in the slot.
+	 * Returns the name string parameter of the item in the slot.
 	 * @return
 	 */
 	public String getItemName() {
@@ -54,7 +54,7 @@ public class Slot {
 	}
 	
 	/**
-	 * returns the type string parameter of the item in the slot.
+	 * Returns the type string parameter of the item in the slot.
 	 * @return
 	 */
 	public String getItemType() {
@@ -62,7 +62,7 @@ public class Slot {
 	}
 	
 	/**
-	 * returns the sound string parameter of the item in the slot.
+	 * Returns the sound string parameter of the item in the slot.
 	 * @return
 	 */
 	public String getItemSound() {

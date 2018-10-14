@@ -73,6 +73,13 @@ public class VendingMachine {
 	}
 	
 	/**
+	 * Clears the customer purchases queue
+	 */
+	public void clearCustomerPurchases() {
+		customerPurchases.clear();
+	}
+	
+	/**
 	 * Takes a slot number as input and returns the price of the corresponding slot.
 	 * @param slotNumber
 	 * @return
