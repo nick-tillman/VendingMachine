@@ -1,6 +1,5 @@
 package com.techelevator.vendingprogram;
 
-import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -61,13 +60,12 @@ public class Menu {
 		if(vm.getCustomerFunds() > 0) {
 			System.out.println("Please take your change: $" + String.format("%.2f", vm.giveChange()));
 		}
-		Queue<Item> copyQueue = new LinkedList<Item>();
-		copyQueue = vm.getCustomerPurchases();
+		Queue<Item> copyQueue = vm.getCustomerPurchases();
 		if(copyQueue.size() == 0) {
 			System.out.println("Buy something next time, will ya!");
 		} else {
 			System.out.println("Enjoy your snacks!");
-			for(int i = 0; i <= copyQueue.size(); i++) {
+			for(int i = 0; i < copyQueue.size(); i++) {
 				String sound = copyQueue.remove().getSound();
 				System.out.println(sound);
 			}

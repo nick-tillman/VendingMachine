@@ -24,7 +24,7 @@ public class VendingMachine {
 	 */
 	public VendingMachine(File setupFile) {
 		inventory = new TreeMap<String, Slot>();
-		logs = new Logs();
+		logs = new Logs(setupFile.getParent());
 		try (Scanner fileScanner = new Scanner(setupFile)) {
 			while (fileScanner.hasNextLine()) {
 				String line = fileScanner.nextLine();
@@ -32,7 +32,7 @@ public class VendingMachine {
 				Item newItem = new Item(itemArray[1], itemArray[3]);
 				Slot newSlot = new Slot(itemArray[0], Double.parseDouble(itemArray[2]), newItem);
 				inventory.put(newSlot.getSlotNumber(), newSlot);
-				logs.setupLogInventory(itemArray[1], Double.parseDouble(itemArray[2]));
+				logs.setupLogsInventory(itemArray[1], Double.parseDouble(itemArray[2]));
 			}
 		} catch (Exception ex) {
 			System.out.println("An exception occurred!");
@@ -124,11 +124,12 @@ public class VendingMachine {
 	 * @param userSelection
 	 */
 	public void purchaseItem(String userSelection) {
+		double fundsBeforePurchase = getCustomerFunds();
 		Slot selection = inventory.get(userSelection);
 		customerPurchases.add(selection.dispense());
 		customerFunds -= selection.getPrice();
-		logs.addToLogInventory(selection.getItemName());
-		// write to log
+		logs.addToLogsInventory(selection.getItemName());
+		logs.writeToLog(selection.getItemName(), selection.getSlotNumber(), fundsBeforePurchase, getCustomerFunds());
 	}
 	
 	/**
@@ -137,7 +138,7 @@ public class VendingMachine {
 	 */
 	public void addFunds(Double feedMoney) {
 		customerFunds += feedMoney;
-		// write to log
+		logs.writeToLog("FEED MONEY:", "", feedMoney, getCustomerFunds());
 	}
 	
 	/**
@@ -148,7 +149,7 @@ public class VendingMachine {
 	public double giveChange() {
 		double change = customerFunds;
 		customerFunds = 0;
-		// write to log
+		logs.writeToLog("GIVE CHANGE:", "", change, getCustomerFunds());
 		return change;
 	}
 	
