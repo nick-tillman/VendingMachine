@@ -27,6 +27,7 @@ public class Program {
 		while (!finished) {
 			
 			menu.mainMenuGraphic();
+			System.out.println();
 			String selection = menu.getInputFromUser("Please select a menu: ");
 			if (selection.equals("1")) {
 				vm.printInventoryList();
@@ -34,6 +35,7 @@ public class Program {
 				boolean done = false;
 				while (!done) {
 					menu.purchaseMenuGraphic();
+					System.out.println();
 					String purchaseSelection = menu.getInputFromUser("Please select an option: ");
 					if(purchaseSelection.equals("1")) {
 						menu.addFunds(vm);

@@ -30,23 +30,22 @@ public class Menu {
 		if(moneyString.equals("1")) {
 			money = Double.parseDouble(moneyString);
 			vm.addFunds(money);
-			System.out.print("Added $1.00. Your current balance is $" + String.format("%.2f", vm.getCustomerFunds()));
+			System.out.println("Added $1.00. Your current balance is $" + String.format("%.2f", vm.getCustomerFunds()));
 		} else if(moneyString.equals("2")) {
 			money = Double.parseDouble(moneyString);
 			vm.addFunds(money);
-			System.out.print("Added $2.00. Your current balance is $" + String.format("%.2f", vm.getCustomerFunds()));
+			System.out.println("Added $2.00. Your current balance is $" + String.format("%.2f", vm.getCustomerFunds()));
 		} else if(moneyString.equals("5")) {
 			money = Double.parseDouble(moneyString);
 			vm.addFunds(money);
-			System.out.print("Added $5.00. Your current balance is $" + String.format("%.2f", vm.getCustomerFunds()));
+			System.out.println("Added $5.00. Your current balance is $" + String.format("%.2f", vm.getCustomerFunds()));
 		} else if(moneyString.equals("10")) {
 			money = Double.parseDouble(moneyString);
 			vm.addFunds(money);
-			System.out.print("Added $10.00. Your current balance is $" + String.format("%.2f", vm.getCustomerFunds()));
+			System.out.println("Added $10.00. Your current balance is $" + String.format("%.2f", vm.getCustomerFunds()));
 		} else {
 			System.out.println("We only accept denominations of $1, $2, $5 and $10!");
 		}
-		
 	}
 	
 	/**
@@ -59,7 +58,9 @@ public class Menu {
 	 */
 	public void purchaseMenu(VendingMachine vm) {
 		System.out.println("You have $" + String.format("%.2f", vm.getCustomerFunds()) + " left to spend.");
+		System.out.println();
 		vm.printInventoryList();
+		System.out.println();
 		String temp = getInputFromUser("Please enter a slot number: ");
 		String userSelection = temp.toUpperCase();
 		if(!vm.isValidSlot(userSelection)) {
