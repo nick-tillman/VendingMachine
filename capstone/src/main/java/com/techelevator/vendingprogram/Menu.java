@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class Menu {
 	
+	//This class deals with most of the user input and checks to make sure that that input is valid.
+	
 	/**
 	 * Used to display a message passed in and then retrieve input from the user.
 	 */
@@ -88,13 +90,13 @@ public class Menu {
 		String userSelection = temp.toUpperCase();
 		if(!vm.isValidSlot(userSelection)) {
 			System.out.println("Please enter a valid slot number!");
-		} else if(vm.getCustomerFunds() < vm.getPurchasePrice(userSelection)) {
+		} else if(vm.getCustomerFunds() < vm.getSlotItemPrice(userSelection)) {
 			System.out.println("You do not have enough funds! Please add money!");
-		} else if(vm.getPurchaseItemQty(userSelection) == 0) {
+		} else if(vm.getSlotItemQty(userSelection) == 0) {
 			System.out.println("SOLD OUT! Please make a different selection!");
 		} else {
 			vm.purchaseItem(userSelection);
-			System.out.println("Enjoy your " + vm.getPurchaseItemName(userSelection) + "!");
+			System.out.println("Enjoy your " + vm.getSlotItemName(userSelection) + "!");
 		}
 	}
 	

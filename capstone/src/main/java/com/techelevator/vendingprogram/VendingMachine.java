@@ -11,73 +11,96 @@ import java.util.TreeMap;
 
 public class VendingMachine {
 
-	private static SortedMap<String, Slot> inventory = new TreeMap<String, Slot>();
+	private SortedMap<String, Slot> inventory;
 	private Queue<Item> customerPurchases = new LinkedList<Item>();
 	private double customerFunds = 0;
+	private Logs logs;
 
 	/**
-	 * Our Vending Machine constructor takes in a vending machine inventory file and then runs our 
-	 * setupMachine method in order to populate our machine with slots and those slots with items.
+	 * Our Vending Machine constructor takes in a vending machine inventory file, scans it in line by 
+	 * line, converts that data to Item and Slot objects, and puts them into our inventory TreeMap
+	 * as well as our logs object's inventories.
 	 * @param setupFile
 	 */
 	public VendingMachine(File setupFile) {
-		setupMachine(setupFile);
+		inventory = new TreeMap<String, Slot>();
+		logs = new Logs();
+		try (Scanner fileScanner = new Scanner(setupFile)) {
+			while (fileScanner.hasNextLine()) {
+				String line = fileScanner.nextLine();
+				String[] itemArray = line.split("\\|");
+				Item newItem = new Item(itemArray[1], itemArray[3]);
+				Slot newSlot = new Slot(itemArray[0], Double.parseDouble(itemArray[2]), newItem);
+				inventory.put(newSlot.getSlotNumber(), newSlot);
+				logs.setupLogInventory(itemArray[1], Double.parseDouble(itemArray[2]));
+			}
+		} catch (Exception ex) {
+			System.out.println("An exception occurred!");
+			ex.printStackTrace();
+		}
 	}
-
+	
+	/**
+	 * returns the inventory TreeMap object.
+	 * @return
+	 */
 	public Map<String, Slot> getInventory() {
 		return this.inventory;
 	}
-
+	
+	/**
+	 * returns the customerFunds balance as a double.
+	 * @return
+	 */
 	public double getCustomerFunds() {
 		return this.customerFunds;
 	}
 	
+	/**
+	 * returns a queue of item objects that the user has purchased.
+	 * @return
+	 */
 	public Queue<Item> getCustomerPurchases() {
 		return customerPurchases;
 	}
 	
 	/**
-	 * Takes a slot number as input, checks if it is valid and returns the price of the corresponding slot.
-	 * Will return null if not a valid slot.
+	 * returns the log object instantiated in the vending machine.
+	 * @return
+	 */
+	public Logs getLogs() {
+		return this.logs;
+	}
+	
+	/**
+	 * Takes a slot number as input and returns the price of the corresponding slot.
 	 * @param slotNumber
 	 * @return
 	 */
-	public double getPurchasePrice(String slotNumber) {
-		Set<String> keySet = inventory.keySet();
-		Slot selectedSlot = null;
-		if(keySet.contains(slotNumber)) {
-			selectedSlot = inventory.get(slotNumber);
-		}
+	public double getSlotItemPrice(String slotNumber) {
+		Slot selectedSlot = inventory.get(slotNumber);
 		return selectedSlot.getPrice();
 	}
 
 	/**
-	 * Takes a slot number as input, checks if it is valid and returns the item name of the corresponding slot.
-	 * Will return null if not a valid slot.
+	 * Takes a slot number as input and returns the item name of the corresponding slot.
 	 * @param slotNumber
 	 * @return
 	 */
-	public String getPurchaseItemName(String slotNumber) {
-		Set<String> keySet = inventory.keySet();
-		Slot selectedSlot = null;
-		if(keySet.contains(slotNumber)) {
-			selectedSlot = inventory.get(slotNumber);
-		}
+	public String getSlotItemName(String slotNumber) {
+		Slot selectedSlot = inventory.get(slotNumber);
 		return selectedSlot.getItemName();
 	}
 	
 	/**
-	 * Takes a slot number as input, checks if it is valid and returns the quantity variable of the corresponding 
-	 * slot. Will return null if not a valid slot.
+	 * Takes a slot number as input and returns the quantity variable of the corresponding 
+	 * slot.
 	 * @param slotNumber
 	 * @return
+	 * 
 	 */
-	public int getPurchaseItemQty(String slotNumber) {
-		Set<String> keySet = inventory.keySet();
-		Slot selectedSlot = null;
-		if(keySet.contains(slotNumber)) {
-			selectedSlot = inventory.get(slotNumber);
-		}
+	public int getSlotItemQty(String slotNumber) {
+		Slot selectedSlot = inventory.get(slotNumber);
 		return selectedSlot.getQuantity();
 	}
 	
@@ -95,24 +118,6 @@ public class VendingMachine {
 	}
 	
 	/**
-	 * Called in our constructor. Takes in the setup file passed to our Vending Machine constructor,
-	 * scans it in line by line, converts that data to Item and Slot objects, and puts them into our
-	 * inventory TreeMap.
-	 */
-	public static void setupMachine(File setupFile) {
-		try (Scanner fileScanner = new Scanner(setupFile)) {
-			while (fileScanner.hasNextLine()) {
-				String line = fileScanner.nextLine();
-				String[] itemArray = line.split("\\|");
-				Item newItem = new Item(itemArray[1], itemArray[3]);
-				Slot newSlot = new Slot(itemArray[0], Double.parseDouble(itemArray[2]), newItem);
-				inventory.put(newSlot.getSlotNumber(), newSlot);
-			}
-		} catch (Exception ex) {
-			System.out.println("An exception occurred!");
-		}
-	}
-	/**
 	 * Takes a slot number as input, calls the dispense method to add an item to our customerPurchases queue
 	 * and reduce that slot quantity by 1, subtracts the slot price from the customers funds and writes to
 	 * our log and sales reports.
@@ -122,8 +127,8 @@ public class VendingMachine {
 		Slot selection = inventory.get(userSelection);
 		customerPurchases.add(selection.dispense());
 		customerFunds -= selection.getPrice();
+		logs.addToLogInventory(selection.getItemName());
 		// write to log
-		// write to sales report
 	}
 	
 	/**
