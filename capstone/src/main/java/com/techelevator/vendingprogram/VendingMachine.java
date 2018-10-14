@@ -161,7 +161,7 @@ public class VendingMachine {
 	}
 	
 	/**
-	 * NOT WORKING YET. Intended to calculate the amount of coins in a given amount of change passed in.
+	 * Calculates the amount of coins in a given amount of change passed in.
 	 * @param change
 	 * @return
 	 */
@@ -169,14 +169,20 @@ public class VendingMachine {
 		int quarters = 0;
 		int dimes = 0;
 		int nickels = 0;
-		String conversion = String.valueOf(change * 100);
-		int coinsLeft = Integer.valueOf(conversion);
-		quarters = coinsLeft/25;
-		coinsLeft -= quarters*25;
-		dimes = coinsLeft/10;
-		coinsLeft -= dimes*10;
-		nickels = coinsLeft/nickels;
-		return quarters + " quarters, " + dimes + " dimes & " + nickels + " nickels";
+		int coinsLeft = (int)(change * 100);
+		if(coinsLeft != 0 && coinsLeft/25 >= 0) {
+			quarters = coinsLeft/25;
+			coinsLeft -= quarters*25;
+		}
+		if(coinsLeft != 0 && coinsLeft/10 >= 0) {
+			dimes = coinsLeft/10;
+			coinsLeft -= dimes*10;
+		}
+		if(coinsLeft != 0 && coinsLeft/5 >= 0) {
+			nickels = coinsLeft/5;
+			coinsLeft -= coinsLeft*5;
+		}
+		return " (" + quarters + " quarters, " + dimes + " dimes & " + nickels + " nickels" + ")";
 	}
 
 	/**

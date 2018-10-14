@@ -84,7 +84,8 @@ public class Menu {
 	 */
 	public void finishTransaction(VendingMachine vm) {
 		if(vm.getCustomerFunds() > 0) {
-			System.out.println("Please take your change: $" + String.format("%.2f", vm.giveChange()));
+			double change = vm.getCustomerFunds();
+			System.out.println("Please take your change: $" + String.format("%.2f", vm.giveChange()) + vm.calculateCoins(change));
 		}
 		Queue<Item> copyQueue = vm.getCustomerPurchases();
 		if(copyQueue.size() == 0) {
