@@ -38,7 +38,8 @@ public class Logs {
 	}
 
 	/**
-	 * Updates the quantity of the passed of the value of the passed in name by 1 in the inventoryQty map.
+	 * Updates the quantity of the value of the passed in name by 1 in the inventoryQty map to keep
+	 * track of how many total items by that name have been sold.
 	 * @param name
 	 */
 	public void addToLogsInventory(String name) {
@@ -81,10 +82,11 @@ public class Logs {
 		File log = new File(filePath, "Log.txt");
 		String before = String.format("%.2f", beforeDbl);
 		String after = String.format("%.2f", afterDbl);
+		String nameAndSlotNumberFormatted = String.format("%-20s", name + " " +slotNumber);
 		DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 		Date date = new Date();
 		String dateString = sdf.format(date);
-		String logEntry = dateString + " " + name + " " + slotNumber + "\t" + "$" + before + "\t" + "$" + after;
+		String logEntry = dateString + " " + nameAndSlotNumberFormatted + "\t" + "$" + before + "\t" + "$" + after;
 		try(FileWriter fw = new FileWriter(log, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);) {
