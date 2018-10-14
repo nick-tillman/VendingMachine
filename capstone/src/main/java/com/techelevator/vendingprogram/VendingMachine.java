@@ -170,15 +170,15 @@ public class VendingMachine {
 		int dimes = 0;
 		int nickels = 0;
 		int coinsLeft = (int)(change * 100);
-		if(coinsLeft != 0 && coinsLeft/25 >= 0) {
+		if(coinsLeft != 0 && coinsLeft/25 >= 1) {
 			quarters = coinsLeft/25;
 			coinsLeft -= quarters*25;
 		}
-		if(coinsLeft != 0 && coinsLeft/10 >= 0) {
+		if(coinsLeft != 0 && coinsLeft/10 >= 1) {
 			dimes = coinsLeft/10;
 			coinsLeft -= dimes*10;
 		}
-		if(coinsLeft != 0 && coinsLeft/5 >= 0) {
+		if(coinsLeft != 0 && coinsLeft/5 >= 1) {
 			nickels = coinsLeft/5;
 			coinsLeft -= coinsLeft*5;
 		}
