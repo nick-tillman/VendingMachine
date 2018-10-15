@@ -20,7 +20,7 @@ public class Item {
 
 	public String getSound() {
 		if (type.equals("Chip")) {
-			return "Crunch, Crunch, Yum!";
+			return "Crunch Crunch, Yum!";
 		}
 		if (type.equals("Candy")) {
 			return "Munch Munch, Yum!";
